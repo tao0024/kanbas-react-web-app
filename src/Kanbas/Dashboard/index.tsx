@@ -5,7 +5,11 @@ export default function Dashboard() {
       <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -21,7 +25,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -37,7 +45,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -53,7 +65,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -69,7 +85,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -85,7 +105,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
@@ -101,7 +125,11 @@ export default function Dashboard() {
         </div>
 
         <div className="wd-dashboard-course">
-          <img src="/images/reactjs.webp" width={200} />
+          <img
+            src="/images/reactjs.webp"
+            alt="Image of the course"
+            width={200}
+          />
           <div>
             <a
               className="wd-dashboard-course-link"
