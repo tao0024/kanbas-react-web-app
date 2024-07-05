@@ -5,6 +5,7 @@ export default function KanbasNavigation() {
         <a
           id="wd-neu-link"
           target="_blank"
+          rel="noreferrer"
           href="https://www.northeastern.edu/"
         >
           Northeastern
@@ -43,4 +44,3 @@ export default function KanbasNavigation() {
     </ul>
   );
 }
-
