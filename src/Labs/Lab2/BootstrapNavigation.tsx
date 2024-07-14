@@ -23,7 +23,7 @@ export default function BootstrapNavigation() {
             <h2>Cards</h2>
             <div className="card"
                 style={{ width: "18rem" }}>
-                <img src="images/stacked.jpg"
+                <img src="images/stacked.jpg" alt="stacked"
                     className="card-img-top" />
                 <div className="card-body">
                 <h5 className="card-title">
@@ -32,7 +32,7 @@ export default function BootstrapNavigation() {
                 <p className="card-text">
                     Stacking the most powerful rocket in history. Mars or bust!
                 </p>
-                <a href="#" className="btn btn-primary">
+                <a href="http://main--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas" className="btn btn-primary">
             Boldly Go
             </a> </div>
             </div>
