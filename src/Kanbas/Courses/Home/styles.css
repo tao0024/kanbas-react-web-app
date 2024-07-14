@@ -1,0 +1,16 @@
+#wd-course-status-container {
+  position: absolute;
+  right: 30px;
+  top: 90px;
+
+}
+
+@media (max-width: 800px) {
+  #wd-course-status-container {
+    display: none;
+  }
+}
+
+.move-left{position: relative;
+  left: -50px;
+}
