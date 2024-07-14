@@ -18,7 +18,7 @@ export default function KanbasNavigation() {
         rel="noreferrer"
         className="list-group-item bg-black border-0"
       >
-        <img src="/images/NEU.png" width="75px" />
+        <img src="/images/NEU.png" alt="NEU logo" width="75px" />
       </a>
       <NavLink
         to="/Kanbas/Account"

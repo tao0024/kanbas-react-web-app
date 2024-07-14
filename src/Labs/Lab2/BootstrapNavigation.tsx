@@ -5,16 +5,16 @@ export default function BootstrapNavigation() {
             <h2>Tabs</h2>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <a className="nav-link active" href="#">Active</a>
+                    <a className="nav-link active" href="http://main--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas">Active</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
+                    <a className="nav-link" href="http://main--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas">Link</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
+                    <a className="nav-link" href="http://main--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas">Link</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link disabled" href="#">Disabled</a>
+                    <a className="nav-link disabled" href="http://main--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas">Disabled</a>
                 </li>
             </ul> 
             </div>
