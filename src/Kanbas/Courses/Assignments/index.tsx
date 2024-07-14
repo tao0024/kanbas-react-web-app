@@ -1,7 +1,6 @@
 import { FaSearch, FaPlus, FaCheckCircle, FaBook } from "react-icons/fa";
 import "./styles.css";
 import { IoEllipsisVertical } from "react-icons/io5";
-import { FaGripVertical } from "react-icons/fa6";
 
 export default function Assignments() {
   const redTextStyle = { color: "#dc3545" };
