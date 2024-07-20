@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import Select from "react-select";
 import db from "../../Database";
@@ -20,6 +20,12 @@ export default function AssignmentEditor() {
     const tagOptions = [
         {value: "Everyone", label: "Everyone"},
     ];
+
+    useEffect(() => {
+        if (assignment) {
+            setAssignment(assignment);
+        }
+    }, [assignment]);
 
     if (!assignment) {
         return <div>Assignment not found</div>;

@@ -61,6 +61,8 @@ const Grades: React.FC = () => {
         setStudents(studentData);
         setAssignments(assignmentData);
         setGrades(gradeData);
+
+        setSelectedCourse(selectedCourse);
     }, [selectedCourse]);
 
     return (
