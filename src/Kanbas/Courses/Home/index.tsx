@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <table id="wd-home">
       <tr>
-        <td valign="top" className="move-left">
+        <td valign="top">
           <Modules />
         </td>
         <td valign="top">
