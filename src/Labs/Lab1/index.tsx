@@ -73,9 +73,88 @@ export default function Lab1() {
           <li>Introduction to AI</li>
           </ul>
         </div>  
+      </div>
 
-
-
+      <div id="wd-tables">
+        <h4>Table Tag</h4>
+        <table border={1} width="100%">
+          <thead>
+            <tr>
+              <th>Quiz</th>
+              <th>Topic</th>
+              <th>Date</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Q1</td>
+              <td>HTML</td>
+              <td>2/3/21</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td>Q2</td>
+              <td>CSS</td>
+              <td>2/10/21</td>
+              <td>90</td>
+            </tr>
+            <tr>
+              <td>Q3</td>
+              <td>JavaScript</td>
+              <td>2/17/21</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>Q4</td>
+              <td>Database</td>
+              <td>2/24/21</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Q5</td>
+              <td>MongoDB</td>
+              <td>3/1/21</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td>Q6</td>
+              <td>Kanbas</td>
+              <td>3/8/21</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Q7</td>
+              <td>Back End</td>
+              <td>3/15/21</td>
+              <td>97</td>
+            </tr>
+            <tr>
+              <td>Q8</td>
+              <td>WWW</td>
+              <td>3/22/21</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td>Q9</td>
+              <td>HTTP</td>
+              <td>3/29/21</td>
+              <td>90</td>
+            </tr>
+            <tr>
+              <td>Q10</td>
+              <td>Network</td>
+              <td>4/7/21</td>
+              <td>93</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={3}>Average</td>
+              <td>90</td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
 
 
@@ -129,6 +208,9 @@ export default function Lab1() {
       Hello World!
       </button>
 
+      <h5>File upload</h5>
+      <input id="wd-upload" type="file"/>
+
       <h5 id="wd-radio-buttons">Radio buttons</h5>
       <label>Favorite movie genre:</label><br />
       <input type="radio" name="radio-genre" id="wd-radio-comedy"/>
@@ -151,6 +233,58 @@ export default function Lab1() {
       <input type="checkbox" name="check-genre" id="wd-chkbox-fantasy"/>
       <label htmlFor="wd-chkbox-fantasy">Fantasy</label>
 
+
+
+      <h4 id="wd-dropdowns">Dropdowns</h4>
+      <h5>Select one</h5>
+      <label htmlFor="wd-select-one-genre"> Favorite movie genre: </label><br/>
+      <select id="wd-select-one-genre">
+        <option value="COMEDY">Comedy</option>
+        <option value="DRAMA">Drama</option>
+        <option selected value="SCIFI">
+            Science Fiction</option>
+        <option value="FANTASY">Fantasy</option>
+      </select>
+      <h5>Select many</h5>
+      <label htmlFor="wd-select-many-genre"> Favorite movie genres: </label><br/>
+      <select id="wd-select-many-genre" multiple>
+        <option selected value="COMEDY">Comedy</option>
+        <option value="DRAMA">Drama</option>
+        <option selected value="SCIFI">
+            Science Fiction</option>
+        <option value="FANTASY">Fantasy</option>
+      </select>
+
+
+
+      <h4>Other HTML field types</h4>
+      <label htmlFor="wd-text-fields-email"> Email: </label>
+      <input type="email"
+            placeholder="jdoe@somewhere.com"
+            id="wd-text-fields-email"/><br/>
+      <label htmlFor="wd-text-fields-salary-start"> Starting salary:
+      </label>
+      <input type="number"
+            id="wd-text-fields-salary-start"
+            placeholder="1000"
+            value="100000"/><br/>
+      <label htmlFor="wd-text-fields-rating"> Rating: </label>
+      <input type="range" id="wd-text-fields-rating"
+            placeholder="Doe"
+            max="5"
+            value="4"/><br/>
+      <label htmlFor="wd-text-fields-dob"> Date of birth: </label>
+      <input type="date"
+            id="wd-text-fields-dob"
+            value="2000-01-21"/><br/>
+
+      <h4>Anchor tag</h4>
+      Please
+      <a id="wd-lipsum" href="https://www.lipsum.com">click here</a>
+      to get dummy text<br/>
+
+      <h4>My Github Link</h4>
+      <a id="wd-github" href="https://github.com/tao0024/kanbas-react-web-app">click here</a>
 
     </div>
   );
