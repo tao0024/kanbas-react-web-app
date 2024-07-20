@@ -28,7 +28,7 @@ export default function ModulesControls() {
             <a
               id="wd-publish-all-modules-and-items-btn"
               className="dropdown-item"
-              href="#"
+              href="http://a3--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas/Dashboard"
             >
               <GreenCheckmark />
               Publish all modules and items
@@ -38,7 +38,7 @@ export default function ModulesControls() {
             <a
               id="wd-publish-modules-only-button"
               className="dropdown-item"
-              href="#"
+              href="http://a3--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas/Dashboard"
             >
               <GreenCheckmark />
               Publish modules only
@@ -48,7 +48,7 @@ export default function ModulesControls() {
             <a
               id="wd-unpublish-all-modules-and-items"
               className="dropdown-item"
-              href="#"
+              href="http://a3--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas/Dashboard"
             >
               <NullCheckmark />
               Unpublish all modules and items
@@ -58,7 +58,7 @@ export default function ModulesControls() {
             <a
               id="wd-unpublish-modules-only"
               className="dropdown-item"
-              href="#"
+              href="http://a3--kanbas-react-web-app-tao-summer2-24.netlify.app/#/Kanbas/Dashboard"
             >
               <NullCheckmark />
               Unpublish modules only
