@@ -1,87 +1,157 @@
-import {FaBook, FaCheckCircle, FaPlus, FaSearch} from "react-icons/fa";
-import {IoEllipsisVertical} from "react-icons/io5";
-import {useParams} from "react-router-dom";
-import assignmentsData from "../../Database/assignments.json";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles.css";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setEditingAssignment,
+  deleteAssignment,
+  clearEditingAssignment,
+} from "./reducer";
+import { FaTrash } from "react-icons/fa";
+import { useState } from "react";
+
+interface Assignment {
+  _id: string;
+  title: string;
+  description: string;
+  course: string;
+  dueDate: string;
+  points: number;
+  availableFrom: string;
+}
 
 export default function Assignments() {
-    const {cid} = useParams<{ cid: string }>();
-    const redTextStyle = {color: "#dc3545"};
+  const { cid } = useParams<{ cid: string }>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const [assignmentToDelete, setAssignmentToDelete] =
+    useState<Assignment | null>(null);
 
-    const assignments = assignmentsData.filter((assignment) => assignment.course === cid);
+  const handleDelete = () => {
+    if (assignmentToDelete) {
+      dispatch(deleteAssignment(assignmentToDelete._id));
+      setAssignmentToDelete(null);
+    }
+  };
 
-    return (
-        <div id="wd-assignments" className="container mt-4">
-            <div
-                id="wd-assignments-controls"
-                className="d-flex justify-content-between align-items-center mb-3"
-            >
-                <div className="position-relative">
-                    <input
-                        id="wd-search-assignment"
-                        className="form-control"
-                        placeholder="Search..."
-                    />
-                    <FaSearch className="search-icon position-absolute"/>
-                </div>
-                <div>
-                    <button
-                        id="wd-add-assignment-group"
-                        className="btn btn-secondary me-2"
-                    >
-                        <FaPlus/> Group
-                    </button>
-                    <button id="wd-add-assignment" className="btn btn-danger">
-                        <FaPlus/> Assignment
-                    </button>
-                </div>
-            </div>
-            <div className="d-flex justify-content-between align-items-center mb-3 wd-assignments-title-item">
-                <h3 id="wd-assignments-title" className="mb-0">
-                    ASSIGNMENTS
-                </h3>
-                <div className="circle-container">
-                    <span className="badge bg-light text-dark">40% of Total</span>
-                    <button className="btn btn-light">+</button>
-                    <div className="float-end">
-                        <IoEllipsisVertical className="fs-4"/>
-                    </div>
-                </div>
-            </div>
-            <ul id="wd-assignment-list" className="list-unstyled">
-                {assignments.map((assignment) => (
-                    <li
-                        key={assignment._id}
-                        className="wd-assignment-list-item border-start border-success border-3 ps-3 mb-3 d-flex align-items-start"
-                    >
-                        <FaBook className="book-icon"/>
-                        <div className="assignment-details">
-                            <div className="first-line">
-                                <a
-                                    className="wd-assignment-link text-decoration-none"
-                                    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                                >
-                                    {assignment.title}
-                                </a>
-                            </div>
-                            <div className="second-line text-muted">
-                                <span style={redTextStyle}>Multiple Modules</span> |{" "}
-                                <span>
-                  <b>Not available until</b> May 6 at 12:00am |
-                </span>
-                            </div>
-                            <div className="third-line text-muted">
-                <span>
-                  <b>Due</b> May 13 at 11:59pm
-                </span>{" "}
-                                | <span>100pts</span>
-                            </div>
-                        </div>
-                        <FaCheckCircle className="text-success fs-5 ms-auto"/>
-                        <IoEllipsisVertical className="fs-4"/>
-                    </li>
-                ))}
-            </ul>
+  return (
+    <div id="wd-assignments" className="container mt-4">
+      <div
+        id="wd-assignments-controls"
+        className="d-flex justify-content-between align-items-center mb-3"
+      >
+        <div className="position-relative">
+          <input
+            id="wd-search-assignment"
+            className="form-control"
+            placeholder="Search..."
+          />
         </div>
-    );
+        <div>
+          <button
+            id="wd-add-assignment-group"
+            className="btn btn-secondary me-2"
+          >
+            Group
+          </button>
+          <button
+            id="wd-add-assignment"
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(clearEditingAssignment());
+              navigate(`/Kanbas/Courses/${cid}/Assignments/Editor`);
+            }}
+          >
+            + Assignment
+          </button>
+        </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center mb-3 wd-assignments-title-item">
+        <h3 id="wd-assignments-title" className="mb-0">
+          ASSIGNMENTS
+        </h3>
+        <div className="circle-container">
+          <span className="badge bg-light text-dark">40% of Total</span>
+        </div>
+      </div>
+      <ul id="wd-assignment-list" className="list-unstyled">
+        {assignments
+          .filter((assignment: Assignment) => assignment.course === cid)
+          .map((assignment: Assignment) => (
+            <li
+              key={assignment._id}
+              className="wd-assignment-list-item border-start border-success border-3 ps-3 mb-3 d-flex align-items-start"
+            >
+              <div className="assignment-details">
+                <div className="first-line">
+                  <Link
+                    to={`/Kanbas/Courses/${cid}/Assignments/Editor/${assignment._id}`}
+                    className="wd-assignment-link text-decoration-none"
+                    onClick={() => dispatch(setEditingAssignment(assignment))}
+                  >
+                    {assignment.title}
+                  </Link>
+                </div>
+                <div className="second-line text-muted">
+                  <span>Multiple Modules</span> |{" "}
+                  <span>
+                    <b>Not available until</b> {assignment.availableFrom}
+                  </span>
+                </div>
+                <div className="third-line text-muted">
+                  <span>
+                    <b>Due</b> {assignment.dueDate}
+                  </span>{" "}
+                  | <span>{assignment.points}pts</span>
+                </div>
+              </div>
+              <FaTrash
+                className="text-danger ms-auto"
+                onClick={() => setAssignmentToDelete(assignment)}
+                style={{ cursor: "pointer" }}
+              />
+            </li>
+          ))}
+      </ul>
+
+      {assignmentToDelete && (
+        <div className="modal fade show d-block" tabIndex={-1} role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Delete Assignment</h5>
+                <button
+                  type="button"
+                  className="close"
+                  onClick={() => setAssignmentToDelete(null)}
+                >
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Are you sure you want to delete this assignment?</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setAssignmentToDelete(null)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
