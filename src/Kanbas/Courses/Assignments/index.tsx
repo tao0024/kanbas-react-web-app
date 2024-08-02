@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setEditingAssignment, clearEditingAssignment } from "./reducer";
 import { FaTrash } from "react-icons/fa";
 import { useState, useEffect } from "react";

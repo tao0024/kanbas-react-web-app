@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import LessonControlButtons from "./LessonControlButtons";
 import ModuleControlButtons from "./ModuleControlButtons";
 import ModulesControls from "./ModulesControls";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import {
   setModules,
@@ -34,6 +34,7 @@ export default function Modules() {
   };
   const saveModule = async (module: any) => {
     const status = await client.updateModule(module);
+    console.log(status)
     dispatch(updateModule(module));
   };
   useEffect(() => {

@@ -76,10 +76,13 @@ export default function AssignmentEditor() {
       const newAssignment = await createAssignment(cid!, {
         ...assignment,
         course: cid!,
-      });
+      }
+      );
+      console.log(newAssignment);
       dispatch(clearEditingAssignment());
       navigate(`/Kanbas/Courses/${cid}/Assignments`, { replace: true });
     }
+  
   };
 
   const handleCancel = () => {
