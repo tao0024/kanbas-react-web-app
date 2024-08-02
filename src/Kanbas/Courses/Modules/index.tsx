@@ -39,7 +39,7 @@ export default function Modules() {
   };
   useEffect(() => {
     fetchModules();
-  }, []);
+  }, [fetchModules]);
   return (
     <div className="wd-alls">
       <ModulesControls
