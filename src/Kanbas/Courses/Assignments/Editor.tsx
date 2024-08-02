@@ -2,12 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addAssignment,
-  updateAssignment,
-  clearEditingAssignment,
-  setEditingAssignment,
-} from "./reducer";
+import { clearEditingAssignment, setEditingAssignment } from "./reducer";
+import { createAssignment, updateAssignment, getAssignments } from "./client";
 import "./editor.css";
 
 interface Assignment {
@@ -25,7 +21,7 @@ export default function AssignmentEditor() {
   const { aid, cid } = useParams<{ aid?: string; cid?: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { assignments, editingAssignment } = useSelector(
+  const { editingAssignment } = useSelector(
     (state: any) => state.assignmentsReducer
   );
   const [assignment, setAssignment] = useState<Assignment>({
@@ -40,15 +36,20 @@ export default function AssignmentEditor() {
   });
 
   useEffect(() => {
-    if (aid) {
-      const currentAssignment = assignments.find(
-        (a: Assignment) => a._id === aid
-      );
-      if (currentAssignment) {
-        dispatch(setEditingAssignment(currentAssignment));
+    const fetchAssignment = async () => {
+      if (aid) {
+        const assignments = await getAssignments(cid!);
+        const currentAssignment = assignments.find(
+          (a: Assignment) => a._id === aid
+        );
+        if (currentAssignment) {
+          dispatch(setEditingAssignment(currentAssignment));
+        }
       }
-    }
-  }, [aid, dispatch, assignments]);
+    };
+
+    fetchAssignment();
+  }, [aid, cid, dispatch]);
 
   useEffect(() => {
     if (editingAssignment) {
@@ -66,14 +67,16 @@ export default function AssignmentEditor() {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (aid) {
-      dispatch(updateAssignment(assignment));
+      await updateAssignment(assignment);
       dispatch(clearEditingAssignment());
       navigate(`/Kanbas/Courses/${cid}/Assignments`);
     } else {
-      const newId = new Date().getTime().toString();
-      dispatch(addAssignment({ ...assignment, _id: newId }));
+      const newAssignment = await createAssignment(cid!, {
+        ...assignment,
+        course: cid!,
+      });
       dispatch(clearEditingAssignment());
       navigate(`/Kanbas/Courses/${cid}/Assignments`, { replace: true });
     }
@@ -87,111 +90,100 @@ export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor" className="container mt-4">
       <div className="row mb-3">
-        <label htmlFor="wd-name" className="col-form-label">
-          <h5>Assignment Name</h5>
+        <label htmlFor="wd-name" className="col-sm-2 col-form-label">
+          Name
         </label>
-        <div className="col">
+        <div className="col-sm-10">
           <input
             id="wd-name"
+            className="form-control"
             name="title"
             value={assignment.title}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row mb-3">
-        <label htmlFor="wd-description" className="col-form-label"></label>
-        <div className="col">
+        <label htmlFor="wd-description" className="col-sm-2 col-form-label">
+          Description
+        </label>
+        <div className="col-sm-10">
           <textarea
             id="wd-description"
+            className="form-control"
             name="description"
             value={assignment.description}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row mb-3">
-        <div className="col-md-2 text-end">
-          <label htmlFor="wd-points" className="col-form-label">
-            Points
-          </label>
-        </div>
-        <div className="col-md-10">
+        <label htmlFor="wd-points" className="col-sm-2 col-form-label">
+          Points
+        </label>
+        <div className="col-sm-10">
           <input
             id="wd-points"
+            className="form-control"
             name="points"
+            type="number"
             value={assignment.points}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row mb-3">
-        <div className="col-md-2 text-end">
-          <label htmlFor="wd-due-date" className="col-form-label">
-            <b>Due</b>
-          </label>
-        </div>
-        <div className="col-md-10">
+        <label htmlFor="wd-dueDate" className="col-sm-2 col-form-label">
+          Due Date
+        </label>
+        <div className="col-sm-10">
           <input
-            type="date"
-            id="wd-due-date"
+            id="wd-dueDate"
+            className="form-control"
             name="dueDate"
+            type="date"
             value={assignment.dueDate}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row mb-3">
-        <div className="col-md-2 text-end">
-          <label htmlFor="wd-available-from" className="col-form-label">
-            <b>Available from</b>
-          </label>
-        </div>
-        <div className="col-md-10">
+        <label htmlFor="wd-availableFrom" className="col-sm-2 col-form-label">
+          Available From
+        </label>
+        <div className="col-sm-10">
           <input
-            type="date"
-            id="wd-available-from"
+            id="wd-availableFrom"
+            className="form-control"
             name="availableFrom"
+            type="date"
             value={assignment.availableFrom}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row mb-3">
-        <div className="col-md-2 text-end">
-          <label htmlFor="wd-available-until" className="col-form-label">
-            <b>Until</b>
-          </label>
-        </div>
-        <div className="col-md-10">
+        <label htmlFor="wd-availableUntil" className="col-sm-2 col-form-label">
+          Available Until
+        </label>
+        <div className="col-sm-10">
           <input
-            type="date"
-            id="wd-available-until"
+            id="wd-availableUntil"
+            className="form-control"
             name="availableUntil"
+            type="date"
             value={assignment.availableUntil}
             onChange={handleChange}
-            className="form-control"
           />
         </div>
       </div>
-
       <div className="row">
-        <div className="col text-end">
-          <button onClick={handleCancel} className="btn btn-secondary me-2">
-            Cancel
-          </button>
-          <button onClick={handleSave} className="btn btn-danger">
+        <div className="col-sm-10 offset-sm-2">
+          <button className="btn btn-danger me-2" onClick={handleSave}>
             Save
+          </button>
+          <button className="btn btn-secondary" onClick={handleCancel}>
+            Cancel
           </button>
         </div>
       </div>

@@ -30,17 +30,15 @@ export default function Dashboard({
           {" "}
           Add{" "}
         </button>
-
-        <button
+      </h5>
+      <br />
+      <button
         className="btn btn-warning float-end me-2"
         onClick={updateCourse}
         id="wd-update-course-click"
       >
         Update
       </button>
-
-      </h5>
-      <br />
       <input
         value={course.name}
         className="form-control mb-2"

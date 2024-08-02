@@ -31,24 +31,23 @@ import Square from "./Square";
 import Highlight from "./Highlight";
 import PathParameters from "./PathParameters";
 import { useSelector } from "react-redux";
-
 export default function Lab3() {
   const { todos } = useSelector((state: any) => state.todosReducer);
   return (
     <div id="wd-lab3" className="container-fluid">
       <h3>Lab 3</h3>
-      <ul>
+      <ul className="list-group">
         {todos.map((todo: any) => (
           <li className="list-group-item" key={todo.id}>
             {todo.title}
-
           </li>
         ))}
       </ul>
-      <VariablesAndConstants/>
-      <VariableTypes/>
+      <hr />
+      <VariablesAndConstants />
+      <VariableTypes />
       <BooleanVariable />
-      <IfElse/>
+      <IfElse />
       <TernaryOperator />
       <ConditionalOutputIfElse />
       <ConditionalOutputInline />
@@ -76,14 +75,15 @@ export default function Lab3() {
       <Add a={3} b={4} />
       <h4>Square of 4</h4>
       <Square children={4} />
-      <hr/>
+      <hr />
       <Square>4</Square>
       <Highlight>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione
+        eaque illo minus cum, saepe totam vel nihil repellat nemo explicabo
+        excepturi consectetur. Modi omnis minus sequi maiores, provident
+        voluptates.
       </Highlight>
       <PathParameters />
-
-
-
-</div>
-); }
+    </div>
+  );
+}

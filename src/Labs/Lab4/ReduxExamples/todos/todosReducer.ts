@@ -3,7 +3,7 @@ const initialState = {
   todos: [
     { id: "1", title: "Learn React" },
     { id: "2", title: "Learn Node" },
-],
+  ],
   todo: { title: "Learn Mongo" },
 };
 const todosSlice = createSlice({
@@ -12,7 +12,7 @@ const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       const newTodos = [
-          ...state.todos,
+        ...state.todos,
         { ...action.payload, id: new Date().getTime().toString() },
       ];
       state.todos = newTodos;
@@ -31,7 +31,8 @@ const todosSlice = createSlice({
     },
     setTodo: (state, action) => {
       state.todo = action.payload;
-}, },
+    },
+  },
 });
 export const { addTodo, deleteTodo, updateTodo, setTodo } = todosSlice.actions;
 export default todosSlice.reducer;

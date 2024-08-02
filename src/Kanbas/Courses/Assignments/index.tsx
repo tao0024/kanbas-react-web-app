@@ -2,35 +2,45 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setEditingAssignment,
-  deleteAssignment,
-  clearEditingAssignment,
-} from "./reducer";
+import { setEditingAssignment, clearEditingAssignment } from "./reducer";
 import { FaTrash } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAssignments, deleteAssignment } from "./client";
 
 interface Assignment {
   _id: string;
   title: string;
   description: string;
-  course: string;
-  dueDate: string;
   points: number;
+  dueDate: string;
   availableFrom: string;
+  availableUntil: string;
+  course: string;
 }
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [assignmentToDelete, setAssignmentToDelete] =
     useState<Assignment | null>(null);
 
-  const handleDelete = () => {
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      const data = await getAssignments(cid!);
+      setAssignments(data);
+    };
+
+    fetchAssignments();
+  }, [cid]);
+
+  const handleDelete = async () => {
     if (assignmentToDelete) {
-      dispatch(deleteAssignment(assignmentToDelete._id));
+      await deleteAssignment(assignmentToDelete._id);
+      setAssignments(
+        assignments.filter((a) => a._id !== assignmentToDelete._id)
+      );
       setAssignmentToDelete(null);
     }
   };
@@ -96,7 +106,7 @@ export default function Assignments() {
                 <div className="second-line text-muted">
                   <span>Multiple Modules</span> |{" "}
                   <span>
-                    <b>Not available until</b> {assignment.availableFrom}
+                    <b>Not available until</b> | {assignment.availableFrom}
                   </span>
                 </div>
                 <div className="third-line text-muted">

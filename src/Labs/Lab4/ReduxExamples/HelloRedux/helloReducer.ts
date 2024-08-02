@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  message: "Hello World !!!!",
+  message: "Hello World",
 };
 const helloSlice = createSlice({
   name: "hello",
@@ -8,4 +8,3 @@ const helloSlice = createSlice({
   reducers: {},
 });
 export default helloSlice.reducer;
-
