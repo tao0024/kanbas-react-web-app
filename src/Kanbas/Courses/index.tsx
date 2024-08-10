@@ -7,7 +7,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import PeopleTable from "./People/Table";
 import { FaAlignJustify } from "react-icons/fa6";
-import PeopleDetails from "./People/Details";
+//import PeopleDetails from "./People/Details";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();

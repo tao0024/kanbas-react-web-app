@@ -22,6 +22,7 @@ export default function Profile() {
   };
   useEffect(() => {
     fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="wd-profile-screen container">
