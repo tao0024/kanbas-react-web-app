@@ -1,0 +1,14 @@
+#wd-modules-controls {
+    position: relative;
+    margin-top: -310px;
+    left: 30px;
+    width: 55vw;
+}
+
+#wd-modules {
+    position: relative;
+    left: 200px;
+    margin-right: 200px;
+    width: 45vw;
+    top: 15px;
+}

@@ -1,0 +1,21 @@
+.All {
+  position: relative;
+  top: -351px;
+  left: 200px;
+  width: 65vw;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  margin-left: 2px;
+}
+
+.btn-light.text-dark {
+  color: #212529;
+}
+
+.transparent-input {
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
