@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaPlus, FaUserCircle } from "react-icons/fa";
 import * as client from "./client";
 import PeopleDetails from "./Details";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function PeopleTable() {
   const [users, setUsers] = useState<any[]>([]);
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const { cid } = useParams();
-  
+
   const filterUsersByName = async (name: string) => {
     setName(name);
     if (name) {
@@ -37,13 +37,15 @@ export default function PeopleTable() {
     if (name === "") {
       console.log("name is an empty string");
     }
-
+  
     const noOp = async () => {
       await createUser();
       console.log("createUser function was called");
     };
     noOp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   const createUser = async () => {
     const user = await client.createUser({
       firstName: "New",
@@ -59,7 +61,13 @@ export default function PeopleTable() {
   return (
     <div id="wd-people-table">
       <PeopleDetails fetchUsers={fetchUsers} />
-      
+      <button
+        onClick={createUser}
+        className="float-end btn btn-danger wd-add-people"
+      >
+        <FaPlus className="me-2" />
+        People
+      </button>
       <input
         onChange={(e) => filterUsersByName(e.target.value)}
         placeholder="Search people"
