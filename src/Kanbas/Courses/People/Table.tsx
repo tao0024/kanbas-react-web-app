@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaPlus, FaUserCircle } from "react-icons/fa";
 import * as client from "./client";
 import PeopleDetails from "./Details";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function PeopleTable() {
   const [users, setUsers] = useState<any[]>([]);
