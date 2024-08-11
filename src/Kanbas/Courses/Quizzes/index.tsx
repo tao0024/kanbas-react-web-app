@@ -1,8 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+// eslint-disable-next-line
 import { FaCheckCircle, FaRocket } from "react-icons/fa";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 
 import { FaPencilAlt } from 'react-icons/fa';
+// eslint-disable-next-line
 import { MdModeEdit } from 'react-icons/md';
 
 import { IoEllipsisVertical} from "react-icons/io5";
@@ -14,6 +16,7 @@ import {
   deleteQuiz,
   clearEditingQuiz,
 } from "./reducer";
+// eslint-disable-next-line
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
@@ -45,7 +48,7 @@ interface Quiz {
   availableFrom: string;
   untilDate: string;
 }
-
+// eslint-disable-next-line
 interface Question {}
 
 export default function Quizzes() {

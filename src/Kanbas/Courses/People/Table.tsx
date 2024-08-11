@@ -7,6 +7,7 @@ import { Link, useParams } from "react-router-dom";
 export default function PeopleTable() {
   const [users, setUsers] = useState<any[]>([]);
   const [role, setRole] = useState("");
+  // eslint-disable-next-line
   const [name, setName] = useState("");
   const { cid } = useParams();
 

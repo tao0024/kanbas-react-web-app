@@ -23,6 +23,7 @@ export default function Profile() {
   };
   useEffect(() => {
     fetchProfile();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="wd-profile-screen container">

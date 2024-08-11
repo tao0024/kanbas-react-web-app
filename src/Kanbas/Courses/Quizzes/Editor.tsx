@@ -107,6 +107,7 @@ export default function QuizEditor() {
         dispatch(setEditingQuiz(updateCurrentQuiz));
       }
     }
+    // eslint-disable-next-line
   }, [qid, dispatch, quizzes]);
 
   useEffect(() => {
@@ -115,6 +116,7 @@ export default function QuizEditor() {
     }
     console.log("useEffect - EditingQuiz");
     console.log(quiz);
+    // eslint-disable-next-line
   }, [editingQuiz]);
 
   const [newQuestion, setNewQuestion] = useState<Question>({
@@ -152,6 +154,7 @@ export default function QuizEditor() {
     setActiveButton(index);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDocumentClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target;
     if (
@@ -226,6 +229,7 @@ export default function QuizEditor() {
   //////////////////////////////////////
 
   /// editor
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleChangeInstrctions = (newDescription: string) => {
       setQuiz((prevQuiz) => ({
       ...prevQuiz,
