@@ -7,13 +7,14 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import PeopleTable from "./People/Table";
 import { FaAlignJustify } from "react-icons/fa6";
-//import PeopleDetails from "./People/Details";
+import Quizzes from "./Quizzes";
+import QuizEditor from "./Quizzes/Editor";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
-  
+
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
@@ -34,11 +35,15 @@ export default function Courses({ courses }: { courses: any[] }) {
             path="Assignments/Editor/:aid"
             element={<AssignmentEditor />}
           />
+          <Route path="Quizzes" element={<Quizzes />} />
+          <Route path="Quizzes/Editor" element={<QuizEditor />} />
+          <Route path="Quizzes/Editor/:qid" element={<QuizEditor />} />
           <Route path="Grades" element={<Grades />} />
           <Route path="People" element={<PeopleTable />} />
-          <Route path="People/:uid" element={<PeopleTable/>} />
+          <Route path="People/:uid" element={<PeopleTable />} />
         </Routes>
       </div>
+
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
+import "./styles.css";
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ export default function Profile() {
   };
   useEffect(() => {
     fetchProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="wd-profile-screen container">
@@ -46,6 +46,7 @@ export default function Profile() {
           <input
             className="wd-firstname form-control mb-2 w-25"
             value={profile.firstName}
+            placeholder="First name"
             onChange={(e) =>
               setProfile({ ...profile, firstName: e.target.value })
             }
@@ -53,6 +54,7 @@ export default function Profile() {
           <input
             className="wd-lastname form-control mb-2 w-25"
             value={profile.lastName}
+            placeholder="Last name"
             onChange={(e) =>
               setProfile({ ...profile, lastName: e.target.value })
             }
@@ -66,6 +68,7 @@ export default function Profile() {
           <input
             className="wd-email form-control mb-2 w-25"
             value={profile.email}
+            placeholder="Email Address"
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
           <select

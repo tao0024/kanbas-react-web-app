@@ -30,15 +30,17 @@ export default function Dashboard({
           {" "}
           Add{" "}
         </button>
-      </h5>
-      <br />
-      <button
+
+        <button
         className="btn btn-warning float-end me-2"
         onClick={updateCourse}
         id="wd-update-course-click"
       >
         Update
       </button>
+
+      </h5>
+      <br />
       <input
         value={course.name}
         className="form-control mb-2"
@@ -58,11 +60,15 @@ export default function Dashboard({
           {courses.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <Link
-                to={`/Kanbas/Courses/${course._id}/Home`}
+                to={`/Kanbas/Courses/${course.number}/Home`}
                 className="text-decoration-none"
               >
                 <div className="card rounded-3 overflow-hidden">
-                  <img src={course.image} alt={course.name} height="160" />
+                  <img
+                    src={`/images/reactjs.jpg`}
+                    alt={course.name}
+                    height="160"
+                  />
                   <div className="card-body">
                     <span
                       className="wd-dashboard-course-link"
@@ -81,7 +87,7 @@ export default function Dashboard({
                       {course.description}
                     </p>
                     <Link
-                      to={`/Kanbas/Courses/${course._id}/Home`}
+                      to={`/Kanbas/Courses/${course.number}/Home`}
                       className="btn btn-primary"
                     >
                       Go
@@ -89,7 +95,7 @@ export default function Dashboard({
                     <button
                       onClick={(event) => {
                         event.preventDefault();
-                        deleteCourse(course._id);
+                        deleteCourse(course.number);
                       }}
                       className="btn btn-danger float-end"
                       id="wd-delete-course-click"

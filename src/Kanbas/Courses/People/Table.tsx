@@ -34,16 +34,6 @@ export default function PeopleTable() {
   };
   useEffect(() => {
     fetchUsers();
-    if (name === "") {
-      console.log("name is an empty string");
-    }
-  
-    const noOp = async () => {
-      await createUser();
-      console.log("createUser function was called");
-    };
-    noOp();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   const createUser = async () => {

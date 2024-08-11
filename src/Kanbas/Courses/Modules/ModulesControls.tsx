@@ -31,6 +31,7 @@ export default function ModulesControls({
           className="btn btn-lg btn-secondary dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
+          style={{ marginLeft: '68px' }} 
         >
           <GreenCheckmark />
           Publish All

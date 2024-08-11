@@ -19,27 +19,33 @@ export default function Kanbas() {
   };
 
   const [course, setCourse] = useState<any>({
-    _id: "1234",
+    number: "1234",
     name: "New Course",
-    number: "New Number",
     startDate: "2023-09-10",
     endDate: "2023-12-15",
-    description: "New Description",
-    image: "/images/reactjs.webp",
+    department: "123",
+    credits: "123",
+    description: "123",
+    updateAt: "123",
   });
   const addNewCourse = async () => {
-    const newCourse = await client.createCourse(course);
+    const uniqueNumber = Date.now().toString();
+    const newCourse = await client.createCourse({
+      ...course,
+      number: uniqueNumber,
+    });
     setCourses([...courses, newCourse]);
   };
+
   const deleteCourse = async (courseId: any) => {
     await client.deleteCourse(courseId);
-    setCourses(courses.filter((course) => course._id !== courseId));
+    setCourses(courses.filter((course) => course.number !== courseId));
   };
   const updateCourse = async () => {
     await client.updateCourse(course);
     setCourses(
       courses.map((c) => {
-        if (c._id === course._id) {
+        if (c.number === course.number) {
           return course;
         } else {
           return c;
@@ -80,8 +86,7 @@ export default function Kanbas() {
                 path="Courses/:cid/*"
                 element={
                   <ProtectedRoute>
-                    {" "}
-                    <Courses courses={courses} />{" "}
+                    <Courses courses={courses} />
                   </ProtectedRoute>
                 }
               />
