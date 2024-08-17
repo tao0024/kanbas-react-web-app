@@ -31,3 +31,15 @@ body * {
 .wd-profile-screen {
     width: 50vw;
 }
+
+
+.wd-profile-actions {
+    display: flex;
+    justify-content: start;
+    gap: 10px; 
+  }
+  
+  .wd-button {
+    width: 150px; 
+  }
+  

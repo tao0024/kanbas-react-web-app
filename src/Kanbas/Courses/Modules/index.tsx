@@ -16,6 +16,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
 export default function Modules() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { cid } = useParams();
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: any) => state.modulesReducer);
@@ -39,19 +40,21 @@ export default function Modules() {
       const modules = await client.findModulesForCourse(cid as string);
       dispatch(setModules(modules));
     };
-    
+
     fetchModules();
   }, [cid, dispatch]);
   return (
+    <div className="d-flex">
     <div className="wd-alls">
-      <ModulesControls
-        setModuleName={setModuleName}
-        moduleName={moduleName}
-        addModule={() => {
-          createModule({ name: moduleName, course: cid });
-          setModuleName("");
-        }}
-      />
+      { (currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
+        <ModulesControls
+          setModuleName={setModuleName}
+          moduleName={moduleName}
+          addModule={() => {
+            createModule({ name: moduleName, course: cid });
+            setModuleName("");
+          }}
+      />)}
       <ul id="wd-modules" className="list-group rounded-0">
         {modules
           .filter((module: any) => module.course === cid)
@@ -74,13 +77,14 @@ export default function Modules() {
                     value={module.name}
                   />
                 )}
+                { (currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
                 <ModuleControlButtons
                   moduleId={module._id}
                   deleteModule={(moduleId) => {
                     removeModule(moduleId);
                   }}
                   editModule={(moduleId) => dispatch(editModule(moduleId))}
-                />
+                />)}
               </div>
               {module.lessons && (
                 <ul className="wd-lessons list-group rounded-0">
@@ -88,7 +92,8 @@ export default function Modules() {
                     <li className="wd-lesson list-group-item p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" />
                       {lesson.name}
-                      <LessonControlButtons />
+                      { (currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
+                      <LessonControlButtons />)}
                     </li>
                   ))}
                 </ul>
@@ -96,6 +101,7 @@ export default function Modules() {
             </li>
           ))}
       </ul>
+    </div>
     </div>
   );
 }

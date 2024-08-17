@@ -42,17 +42,20 @@ export default function Kanbas() {
     setCourses(courses.filter((course) => course.number !== courseId));
   };
   const updateCourse = async () => {
-    await client.updateCourse(course);
-    setCourses(
-      courses.map((c) => {
-        if (c.number === course.number) {
-          return course;
-        } else {
-          return c;
-        }
-      })
-    );
+    console.log("Update button clicked");
+    const updatedCourse = await client.updateCourse(course);
+    console.log("Updated Course:", updatedCourse);
+    
+    setCourses(prevCourses => {
+      const newCourses = prevCourses.map(c => 
+        c.number === updatedCourse.number ? updatedCourse : c
+      );
+      console.log("Updated Courses Array:", newCourses);  // 在setCourses内部打印更新后的状态
+      return newCourses;
+    });
   };
+  
+  
   useEffect(() => {
     fetchCourses();
   }, []);
@@ -63,6 +66,7 @@ export default function Kanbas() {
           <div className="d-none d-md-block bg-black">
             <KanbasNavigation />
           </div>
+
           <div className="wd-main-content-offset p-3">
             <Routes>
               <Route path="/" element={<Navigate to="Dashboard" />} />

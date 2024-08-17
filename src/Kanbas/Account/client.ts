@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const axiosWithCredentials = axios.create({ withCredentials: true });
 export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
@@ -22,3 +23,14 @@ export const signout = async () => {
   const response = await axiosWithCredentials.post(`${USERS_API}/signout`);
   return response.data;
 };
+
+export const updateProfile = async (profileData: any) => {
+  const response = await axiosWithCredentials.put(`${USERS_API}/${profileData._id}`, profileData);
+  return response.data;
+};
+
+export const updateUser = async (userId: any, userUpdates: any) => {
+  const response = await axiosWithCredentials.put(`${USERS_API}/${userId}`, userUpdates);
+  return response.data;
+};
+

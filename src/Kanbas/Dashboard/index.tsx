@@ -1,4 +1,22 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../Account/reducer";
+import * as client from '../Account/client';
+
+
+interface Course {
+  _id: string,
+  name: string,
+  number: string,
+  startDate: string,
+  endDate: string,
+  department: string,
+  credits: number,
+  description: string,
+  image: string,
+}
 
 export default function Dashboard({
   courses,
@@ -15,12 +33,54 @@ export default function Dashboard({
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
 }) {
+  const dispatch = useDispatch();
+  const [enrolPage, setEnrolPage] = useState(false);
+  const UpdateEnrolPage = () => {
+    setEnrolPage(!enrolPage);
+  }
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  useEffect(() => {
+    console.log("Dashboard received updated courses:", courses);
+  }, [courses]);
+
+  // Function to add a course to the current user
+  const addCourseToUser = async (courseToAdd: any) => {
+    if (currentUser && Array.isArray(currentUser.enrol)) {
+      const updatedEnrol = [...currentUser.enrol, courseToAdd];
+      const updatedUser = { ...currentUser, enrol: updatedEnrol };
+      try {
+        
+        const updatedUserInfo = await client.updateUser(currentUser._id, { enrol: updatedEnrol });
+        
+        if (updatedUserInfo) {
+          dispatch(setCurrentUser(updatedUserInfo));
+        } else {
+          console.error("Update user failed, no user info returned from the backend.");
+        }
+      } catch (error) {
+        console.error("Failed to update user courses", error);
+      }
+    }
+  };
+  
+  const enrolledCourses = courses.filter(course =>
+    currentUser.enrol.some((enrolledCourse: any) => enrolledCourse.number === course.number)
+  );
+  
+
+  // Console logs to check current user information
+  // console.log("In the Dashboard Page, Check User Information: ", currentUser);
+  // console.log("Enrolled courses:", currentUser && currentUser.enrol ? currentUser.enrol : "No courses enrolled");
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1>
       <hr />
-
-      <h5>
+      { (currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
+        <>
+        <h5>
         New Course
         <button
           className="btn btn-primary float-end"
@@ -52,20 +112,67 @@ export default function Dashboard({
         onChange={(e) => setCourse({ ...course, description: e.target.value })}
       />
       <hr />
+      </>
+      )}
 
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+      <div className="d-flex justify-content-between">
+        <h2 id="wd-dashboard-published">Enrolled Courses ({currentUser && currentUser.enrol ? currentUser.enrol.length : 0})</h2>
+        <button
+          className="btn btn-primary float-end"
+          onClick={UpdateEnrolPage}
+        >
+          Enrol
+        </button>
+      </div>
+      {enrolPage && (
+        <div className="modal fade show d-block" tabIndex={-1} role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header justify-content-between">
+                <h5 className="modal-title">Click Any Course to Enrol</h5>
+                <button
+                  type="button"
+                  className="close"
+                  onClick={UpdateEnrolPage}
+                >
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                {courses.map((course) => (
+                  <button
+                    key={course._id}
+                    onClick={() => addCourseToUser(course)}
+                  >
+                    {course.number + " - " + course.name}
+                  </button>
+                ))}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={UpdateEnrolPage}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses.map((course) => (
-            <div className="wd-dashboard-course col" style={{ width: "300px" }}>
+          {enrolledCourses.map((course: Course) => (
+            <div className="wd-dashboard-course col" style={{ width: "300px" }} key={course._id}>
               <Link
                 to={`/Kanbas/Courses/${course.number}/Home`}
                 className="text-decoration-none"
               >
                 <div className="card rounded-3 overflow-hidden">
                   <img
-                    src={`/images/reactjs.jpg`}
+                    src={`/images/reactjs.jpg`}  
                     alt={course.name}
                     height="160"
                   />
@@ -95,24 +202,25 @@ export default function Dashboard({
                     <button
                       onClick={(event) => {
                         event.preventDefault();
-                        deleteCourse(course.number);
+                        deleteCourse(course);
                       }}
                       className="btn btn-danger float-end"
                       id="wd-delete-course-click"
                     >
                       Delete
                     </button>
-
-                    <button
-                      id="wd-edit-course-click"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        setCourse(course);
-                      }}
-                      className="btn btn-warning me-2 float-end"
-                    >
-                      Edit
-                    </button>
+                    {(currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 float-end"
+                      >
+                        Edit
+                      </button>
+                    )}
                   </div>
                 </div>
               </Link>
@@ -120,6 +228,7 @@ export default function Dashboard({
           ))}
         </div>
       </div>
+
     </div>
   );
 }
