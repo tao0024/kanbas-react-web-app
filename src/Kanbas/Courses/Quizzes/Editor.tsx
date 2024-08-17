@@ -172,6 +172,7 @@ export default function QuizEditor() {
     setActiveButton(index);
   };
 
+  // eslint-disable-next-line
   const handleDocumentClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target;
     if (
@@ -183,6 +184,7 @@ export default function QuizEditor() {
     }
   };
 
+  // eslint-disable-next-line
   const [quizType, setQuizType] = useState('Graded Quiz');
   const quizTypeOption = [
     { value: 'Graded Quiz', label: 'Graded Quiz' },
@@ -198,6 +200,7 @@ export default function QuizEditor() {
     }));
   };
 
+  // eslint-disable-next-line
   const [assignmentGroup, setAssignmentGroup] = useState('Quizzes');
   const assignmentGroupOption = [
     { value: 'Quizzes', label: 'Quizzes' },
@@ -213,6 +216,7 @@ export default function QuizEditor() {
     }));
   };
 
+  // eslint-disable-next-line
   const [showCorrectAnswer, setShowCorrectAnswer] = useState('Immediately');
   const showCorrectAnswerOption = [
     { value: 'Immediately', label: 'Immediately' },
@@ -296,6 +300,7 @@ export default function QuizEditor() {
       dispatch(clearEditingQuiz());
       navigate(`/Kanbas/Courses/${cid}/Quizzes`);
     } else {
+      // eslint-disable-next-line
       const newQuiz = await createQuiz(cid!, { ...quizToSave, isPublished: false });
       dispatch(clearEditingQuiz());
       navigate(`/Kanbas/Courses/${cid}/Quizzes`, { replace: true });

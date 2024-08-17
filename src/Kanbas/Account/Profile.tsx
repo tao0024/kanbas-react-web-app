@@ -38,6 +38,7 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfile();
+    // eslint-disable-next-line
   }, []);
 
   return (

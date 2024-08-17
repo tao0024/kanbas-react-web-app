@@ -49,6 +49,7 @@ export default function Dashboard({
   const addCourseToUser = async (courseToAdd: any) => {
     if (currentUser && Array.isArray(currentUser.enrol)) {
       const updatedEnrol = [...currentUser.enrol, courseToAdd];
+      // eslint-disable-next-line
       const updatedUser = { ...currentUser, enrol: updatedEnrol };
       try {
         

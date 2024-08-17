@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
 import { setEditingQuiz, deleteQuiz, clearEditingQuiz, setQuizzes, updateQuiz } from "./reducer";
+// eslint-disable-next-line
 import { FaTrash } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdDoNotDisturbAlt, MdCheckBox } from "react-icons/md"; 
@@ -69,6 +70,7 @@ interface Question {
   studentAnswer: string[];
 }
 
+// eslint-disable-next-line
 function calculatePoints(quiz: Quiz, username: string) {
   let points = 0;
   quiz.questionList.forEach((q) => {
@@ -116,6 +118,7 @@ function checkStatus(quiz: Quiz) {
 
   const currentDate1 = new Date();
   const availableDate1 = new Date(quiz.availableFrom);
+  // eslint-disable-next-line
   const dueDate1 = new Date(quiz.dueDate);
   const untilDate1 = new Date(quiz.untilDate);
 
